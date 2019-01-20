@@ -10,7 +10,6 @@ import UIKit
 
 class HomeViewController: UITableViewController {
     
-    
     var homeViewModels = [HomeViewModel]()
     let cellId = "cellId"
     
@@ -46,7 +45,7 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HomeListTableViewCell
+        
         var cell:HomeListTableViewCell? = tableView.dequeueReusableCell(withIdentifier:"HomeListTableViewCell") as? HomeListTableViewCell
         if cell == nil{
             tableView.register(UINib.init(nibName: "HomeListTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeListTableViewCell")
@@ -70,13 +69,8 @@ class HomeViewController: UITableViewController {
     }
     
     fileprivate func setupTableView() {
+        
         tableView.register(HomeListTableViewCell.self, forCellReuseIdentifier: cellId)
-//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-//        tableView.separatorColor = .mainTextBlue
-//        tableView.backgroundColor = UIColor.rgb(r: 12, g: 47, b: 57)
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 80
-//        tableView.tableFooterView = UIView()
     }
     
     fileprivate func setupNavBar() {
@@ -88,19 +82,6 @@ class HomeViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = UIColor.rgb(r: 40, g: 40, b: 41)
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
-
-
-    /*
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 class CustomNavigationController: UINavigationController {

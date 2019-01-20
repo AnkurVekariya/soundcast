@@ -23,7 +23,6 @@
 		92F9C93821F380BA00FFDF3B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9C93721F380BA00FFDF3B /* PlayerViewController.swift */; };
 		92F9C93A21F3877800FFDF3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92F9C93921F3877800FFDF3B /* Assets.xcassets */; };
 		92F9C93C21F44ABC00FFDF3B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F9C93B21F44ABC00FFDF3B /* AVFoundation.framework */; };
-		92F9C93E21F4A82600FFDF3B /* BeatIt.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 92F9C93D21F4A82600FFDF3B /* BeatIt.mp3 */; };
 		9588A2CAE3162FCF63732286 /* Pods_SoundCastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B430C0C2F822DF2E4C0A75D5 /* Pods_SoundCastUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		92F9C93721F380BA00FFDF3B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		92F9C93921F3877800FFDF3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92F9C93B21F44ABC00FFDF3B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		92F9C93D21F4A82600FFDF3B /* BeatIt.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BeatIt.mp3; sourceTree = "<group>"; };
 		9A625357161B9AC1D1D2A92E /* Pods_SoundCast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6DD500581FFFB0BEEFBF1E3 /* Pods-SoundCast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCast.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCast/Pods-SoundCast.release.xcconfig"; sourceTree = "<group>"; };
 		B430C0C2F822DF2E4C0A75D5 /* Pods_SoundCastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,7 +142,6 @@
 		92F9C8F521F1B3F700FFDF3B /* SoundCast */ = {
 			isa = PBXGroup;
 			children = (
-				92F9C93D21F4A82600FFDF3B /* BeatIt.mp3 */,
 				92F9C8F621F1B3F700FFDF3B /* AppDelegate.swift */,
 				92F9C92421F1CB8C00FFDF3B /* Services */,
 				92F9C92621F1CBAA00FFDF3B /* Model */,
@@ -338,7 +335,6 @@
 				92F9C90121F1B3F800FFDF3B /* LaunchScreen.storyboard in Resources */,
 				92F9C92E21F1D0EA00FFDF3B /* HomeListTableViewCell.xib in Resources */,
 				92F9C93A21F3877800FFDF3B /* Assets.xcassets in Resources */,
-				92F9C93E21F4A82600FFDF3B /* BeatIt.mp3 in Resources */,
 				92F9C8FC21F1B3F700FFDF3B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

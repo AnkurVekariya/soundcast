@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 
-
 class Service: NSObject {
     
     static let shared = Service()

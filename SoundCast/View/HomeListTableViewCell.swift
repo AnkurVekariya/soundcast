@@ -11,8 +11,6 @@ import SDWebImage
 
 class HomeListTableViewCell: UITableViewCell {
 
-    
-    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var img: UIImageView!
@@ -32,9 +30,6 @@ class HomeListTableViewCell: UITableViewCell {
             }
             nameLabel?.text = homeViewModel.title
             img.sd_setImage(with: URL(string: homeViewModel.thumbnailURL), placeholderImage: UIImage(named: "trackPlaceholder"))
-            
-//            detailTextLabel?.text = courseViewModel.detailTextString
-//            accessoryType = courseViewModel.accessoryType
         }
     }
 

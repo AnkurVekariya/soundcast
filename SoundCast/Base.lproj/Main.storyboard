@@ -116,6 +116,8 @@
                     <navigationItem key="navigationItem" id="NC9-Fn-5zy"/>
                     <connections>
                         <outlet property="playButton" destination="7dj-Zt-Xd7" id="idc-qt-VF3"/>
+                        <outlet property="trackImage" destination="Yn2-id-2bw" id="PIp-LY-h1x"/>
+                        <outlet property="trackTitle" destination="ai6-Jw-FZj" id="XFe-tO-sAi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
