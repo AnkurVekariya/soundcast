@@ -27,6 +27,20 @@ class SoundCastUITests: XCTestCase {
     }
 
     func testExample() {
+
+        let tablesQuery = XCUIApplication().tables
+        
+        XCTAssertEqual(tablesQuery.count, 1)
+        
+        let table = tablesQuery.allElementsBoundByIndex[0]
+        //XCTAssertEqual(table.cells.count, 0)
+        
+        
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["The Amazing Spider Man"].swipeRight()/*[[".cells.staticTexts[\"The Amazing Spider Man\"]",".swipeUp()",".swipeRight()",".staticTexts[\"The Amazing Spider Man\"]"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
+        
+        XCTAssertEqual(table.cells.count, 100)
+       
+        
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

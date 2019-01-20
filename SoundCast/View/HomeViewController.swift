@@ -26,7 +26,7 @@ class HomeViewController: UITableViewController {
     fileprivate func fetchData() {
         Service.shared.fetchTracks{ (tracks, err) in
             if let err = err {
-                print("Failed to fetch courses:", err)
+                print("Failed to fetch tracks:", err)
                 return
             }
             print(tracks as Any)
