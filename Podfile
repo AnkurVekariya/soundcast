@@ -8,6 +8,8 @@ target 'SoundCast' do
   # Pods for SoundCast
    pod 'Alamofire', '~> 4.7'
    pod 'SDWebImage', '~> 4.0'
+   pod 'ReachabilitySwift'
+
 
   target 'SoundCastTests' do
     inherit! :search_paths

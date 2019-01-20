@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import Reachability
 
 class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     
@@ -27,6 +28,9 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     //viewmodel Int
     var homeViewModels = [HomeViewModel]()
     
+    //Internet reachability check
+    let reachability = Reachability()!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(UIScreen.main.nativeBounds.height)
@@ -34,6 +38,32 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         prepareAudio()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.finishTrack), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+    }
+    
+    //check network reachability callback
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+        case .cellular:
+            print("Reachable via Cellular")
+        case .none:
+            print("Network not reachable")
+            self.showToast(message: "Network not reachable")
+        }
     }
     
     // Prepare audio for playing
@@ -160,6 +190,25 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         else{
             spaceConstraint.constant = 85.0
         }
+    }
+    
+    func showToast(message : String) {
+        
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 130, y: self.view.frame.size.height-100, width: 260, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
     
     @IBAction func listButtonTapAction(_ sender: Any) {

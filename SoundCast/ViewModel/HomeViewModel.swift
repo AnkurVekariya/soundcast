@@ -21,7 +21,6 @@ struct HomeViewModel {
         self.title = track.title ?? "Untitled"
         self.link = track.link ?? ""
         self.thumbnailURL = track.thumbnail ?? ""
-        
     }
-    
+
 }
