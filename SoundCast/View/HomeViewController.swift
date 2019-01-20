@@ -13,6 +13,9 @@ class HomeViewController: UITableViewController {
     var homeViewModels = [HomeViewModel]()
     let cellId = "cellId"
     
+    //refresh control
+    let refresControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +32,11 @@ class HomeViewController: UITableViewController {
                 print("Failed to fetch tracks:", err)
                 return
             }
-            print(tracks as Any)
+            self.refresControl.endRefreshing()
+            //got data so display tableview
+            DispatchQueue.main.async {
+                self.tableView.isHidden = false
+            }
             self.homeViewModels = tracks?.map({return HomeViewModel(track: $0)}) ?? []
             self.tableView.reloadData()
         }
@@ -69,9 +76,25 @@ class HomeViewController: UITableViewController {
     }
     
     fileprivate func setupTableView() {
-        
+        DispatchQueue.main.async {
+            self.tableView.isHidden = true
+        }
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refresControl
+        } else {
+            tableView.addSubview(refresControl)
+        }
+        refresControl.addTarget(self, action: #selector(refreshTrackData(_:)), for: .valueChanged)
+
         tableView.register(HomeListTableViewCell.self, forCellReuseIdentifier: cellId)
     }
+    
+    @objc private func refreshTrackData(_ sender: Any) {
+        // Fetch track Data
+        fetchData()
+    }
+
     
     fileprivate func setupNavBar() {
         navigationItem.title = "Tracks"
