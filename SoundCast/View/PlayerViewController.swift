@@ -21,6 +21,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     //setup UI
     @IBOutlet weak var trackImage: UIImageView!
     @IBOutlet weak var trackTitle: UILabel!
+    @IBOutlet weak var playerSlider: UISlider!
     
     //viewmodel Int
     var homeViewModels = [HomeViewModel]()
@@ -29,6 +30,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         super.viewDidLoad()
         prepareAudio()
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.finishTrack), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
     // Prepare audio for playing
@@ -43,13 +45,16 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
             
             //check for url is playable or not
             if AVAsset(url: audioUrl! as URL).isPlayable{
-                
-                playButton.setImage(UIImage(named: "pauseIcon"), for: UIControl.State.normal)
+               
+                playButton.setImage(UIImage(named: "playIcon"), for: UIControl.State.normal)
                 do {
                     try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
                     try AVAudioSession.sharedInstance().setActive(true)
                     player = AVPlayer(url: audioUrl! as URL)
-                    player?.play()
+                    //player?.play()
+                    let _ = player!.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { [weak self] (time) in
+                        self!.playerSlider.value = Float(CMTimeGetSeconds(time)) / Float(CMTimeGetSeconds( AVAsset(url: audioUrl! as URL).duration))
+                    }
                 } catch {
                     print("get player Error = " + "\(error)")
                     if currentTrackIndex >= 0 && currentTrackIndex < homeViewModels.count {
@@ -80,7 +85,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         let fileExtension = trackUrl?.pathExtension // mp3
         if let fileExtension = fileExtension {
             
-            if fileExtension1 == "mp3"{
+            if fileExtension == "mp3"{
                 return true
             }
             else{
@@ -95,6 +100,8 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         if currentTrackIndex >= 0 &&  currentTrackIndex < homeViewModels.count{
             currentTrackIndex += 1
             prepareAudio()
+            playButton.setImage(UIImage(named: "pauseIcon"), for: UIControl.State.normal)
+            player?.play()
         }
     }
     
@@ -103,7 +110,18 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         if currentTrackIndex < homeViewModels.count {
             currentTrackIndex -= 1
             prepareAudio()
+            playButton.setImage(UIImage(named: "pauseIcon"), for: UIControl.State.normal)
+            player?.play()
         }
+    }
+    
+    @objc func finishTrack()
+    {
+        //currunt track finished update play button image and reset slider
+        playButton.setImage(UIImage(named: "playIcon"), for: UIControl.State.normal)
+        playerSlider.value = 0.0
+        prepareAudio()
+
     }
     
     @IBAction func playButtonTap(_ sender: Any) {
