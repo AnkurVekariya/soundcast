@@ -81,7 +81,11 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
                
                 playButton.setImage(UIImage(named: "playIcon"), for: UIControl.State.normal)
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                    if #available(iOS 10.0, *) {
+                        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                     try AVAudioSession.sharedInstance().setActive(true)
                     player = AVPlayer(url: audioUrl! as URL)
                     let _ = player!.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { [weak self] (time) in
