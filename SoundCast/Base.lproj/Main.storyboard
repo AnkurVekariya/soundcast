@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trackPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Yn2-id-2bw">
-                                <rect key="frame" x="87.5" y="155" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="158" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="5VT-Rm-avu"/>
                                     <constraint firstAttribute="width" constant="200" id="GNJ-iO-bbt"/>
@@ -103,6 +103,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ai6-Jw-FZj" secondAttribute="trailing" constant="46" id="4Or-Ig-29M"/>
                             <constraint firstItem="Zqv-AV-DcW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7oJ-Eo-mSK"/>
                             <constraint firstItem="rlH-aQ-aUL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="9E0-ZT-hu8"/>
+                            <constraint firstItem="ByY-07-3a2" firstAttribute="top" secondItem="Yn2-id-2bw" secondAttribute="bottom" constant="40" id="AcV-SF-akd"/>
                             <constraint firstItem="rlH-aQ-aUL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="FJo-tD-UUa"/>
                             <constraint firstItem="ai6-Jw-FZj" firstAttribute="top" secondItem="ByY-07-3a2" secondAttribute="bottom" constant="40" id="HAg-BD-fos"/>
                             <constraint firstItem="ByY-07-3a2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="Kv6-4o-QTe"/>
@@ -114,9 +115,6 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="CJs-CT-kGk" firstAttribute="centerY" secondItem="RXu-oP-WV6" secondAttribute="centerY" id="R1n-Jh-3CC"/>
-                            <constraint firstItem="Yn2-id-2bw" firstAttribute="top" secondItem="Zqv-AV-DcW" secondAttribute="bottom" constant="100" id="axG-ze-D9g">
-                                <variation key="heightClass=regular-widthClass=compact" constant="90"/>
-                            </constraint>
                             <constraint firstItem="CJs-CT-kGk" firstAttribute="leading" secondItem="7dj-Zt-Xd7" secondAttribute="trailing" constant="50" id="gZN-F0-T2F"/>
                             <constraint firstItem="7dj-Zt-Xd7" firstAttribute="centerY" secondItem="RXu-oP-WV6" secondAttribute="centerY" id="gpI-Tn-lLJ"/>
                             <constraint firstItem="Zqv-AV-DcW" firstAttribute="centerY" secondItem="rlH-aQ-aUL" secondAttribute="centerY" id="msQ-Ht-9YJ"/>
@@ -128,6 +126,7 @@
                     <connections>
                         <outlet property="playButton" destination="7dj-Zt-Xd7" id="idc-qt-VF3"/>
                         <outlet property="playerSlider" destination="ByY-07-3a2" id="psv-Bh-7Ow"/>
+                        <outlet property="spaceConstraint" destination="AcV-SF-akd" id="Q2I-Zj-qcC"/>
                         <outlet property="trackImage" destination="Yn2-id-2bw" id="PIp-LY-h1x"/>
                         <outlet property="trackTitle" destination="ai6-Jw-FZj" id="XFe-tO-sAi"/>
                     </connections>

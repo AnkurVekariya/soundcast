@@ -18,6 +18,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     var currentAudio = ""
     var player: AVPlayer?
     
+    @IBOutlet weak var spaceConstraint: NSLayoutConstraint!
     //setup UI
     @IBOutlet weak var trackImage: UIImageView!
     @IBOutlet weak var trackTitle: UILabel!
@@ -28,6 +29,8 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UIScreen.main.nativeBounds.height)
+        uiSetup()
         prepareAudio()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.finishTrack), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -51,7 +54,6 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
                     try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
                     try AVAudioSession.sharedInstance().setActive(true)
                     player = AVPlayer(url: audioUrl! as URL)
-                    //player?.play()
                     let _ = player!.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { [weak self] (time) in
                         self!.playerSlider.value = Float(CMTimeGetSeconds(time)) / Float(CMTimeGetSeconds( AVAsset(url: audioUrl! as URL).duration))
                     }
@@ -148,6 +150,16 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         trackImage.sd_setImage(with: URL(string: homeViewModel.thumbnailURL), placeholderImage: UIImage(named: "trackPlaceholder"))
         
         currentAudio = homeViewModel.link
+    }
+    
+    func uiSetup(){
+        
+        if UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 1136 {
+            spaceConstraint.constant = 25.0
+        }
+        else{
+            spaceConstraint.constant = 85.0
+        }
     }
     
     @IBAction func listButtonTapAction(_ sender: Any) {
