@@ -37,6 +37,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         setCurrentAudioPath()
 
         let audioUrl = NSURL(string: currentAudio)
+        playButton.setImage(UIImage(named: "pauseIcon"), for: UIControl.State.normal)
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -54,7 +55,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         if currentTrackIndex >= 0 {
             
             currentTrackIndex += 1
-            setCurrentAudioPath()
+            prepareAudio()
         }
     }
     @IBAction func prevButtonTap(_ sender: Any) {
@@ -62,15 +63,20 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
         if currentTrackIndex < homeViewModels.count {
             
             currentTrackIndex -= 1
-            setCurrentAudioPath()
+            prepareAudio()
         }
     }
     
     @IBAction func playButtonTap(_ sender: Any) {
         
         if player?.rate != 0 {
-        
+            playButton.setImage(UIImage(named: "playIcon"), for: UIControl.State.normal)
+            player?.pause()
+        }
+        else{
             
+            playButton.setImage(UIImage(named: "pauseIcon"), for: UIControl.State.normal)
+            player?.play()
         }
     }
     
@@ -78,7 +84,7 @@ class PlayerViewController: UIViewController,AVAudioPlayerDelegate {
     func setCurrentAudioPath(){
         
             let homeViewModel = homeViewModels[currentTrackIndex]
-            print("currentIndex is = " + "\(homeViewModel.title)")
+            print("currentIndex is = " + "\(homeViewModel.link)")
             currentAudio = homeViewModel.link
 
     }
